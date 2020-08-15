@@ -1,52 +1,48 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import {Button, Table} from 'antd';
 import moment from 'moment';
 
-const ItemTable = ({tableData = [], withReceivedBtn = false}) => {
-
+const ItemTable = ({tableData = [], withReceivedBtn = false, handleReceived = () => null}) => {
     const [dataSource, setDataSource] = useState([])
+    const columns = useMemo(() => {
+        return [
+            {
+                title: 'Name',
+                dataIndex: 'name',
+                key: 'name',
+            },
+            {
+                title: 'Online Store',
+                dataIndex: 'store',
+                key: 'store',
+            },
+            {
+                title: 'Price',
+                dataIndex: 'price',
+                key: 'price',
+            },
+            {
+                title: 'Delivery Estimation Date',
+                dataIndex: 'date',
+                key: 'date',
+                render: (date) => {
+                    return (<span>{moment.unix(date / 1000).format('DD/MM/YYYY')}</span>)
+                }
+            },
+            {
+                title: 'Action',
+                dataIndex: 'action',
+                key: 'action',
+                render: (item) => (
+                    <Button shape={"round"} type="primary" onClick={_ => handleReceived(item)}>
+                        Received
+                    </Button>
 
-    const handleReceived = (index) => {
-        console.log(index)
-    }
+                )
+            },
 
-    const columns = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-        },
-        {
-            title: 'Online Store',
-            dataIndex: 'store',
-            key: 'store',
-        },
-        {
-            title: 'Price',
-            dataIndex: 'price',
-            key: 'price',
-        },
-        {
-            title: 'Delivery Estimation Date',
-            dataIndex: 'date',
-            key: 'date',
-            render: (date) => {
-                return (<span>{moment.unix(date / 1000).format('DD/MM/YYYY')}</span>)
-            }
-        },
-        {
-            title: 'Action',
-            dataIndex: 'action',
-            key: 'action',
-            render: (item) => (
-                <Button shape={"round"} type="primary" onClick={_ => handleReceived(item)}>
-                    Received
-                </Button>
-
-            )
-        },
-
-    ];
+        ]
+    }, [handleReceived]);
 
 
     useEffect(() => {
@@ -57,7 +53,7 @@ const ItemTable = ({tableData = [], withReceivedBtn = false}) => {
                     key: index,
                     name: item.name,
                     store: item.onlineStore,
-                    price: item.price.num,
+                    price: item.priceInNIS,
                     date: item.deliveryEstDate
                 }
                 if (withReceivedBtn) {
@@ -65,15 +61,8 @@ const ItemTable = ({tableData = [], withReceivedBtn = false}) => {
                 }
                 data.push(itemObj)
             })
-            setDataSource(data.sort((a, b) => {
-                if (a.date < b.date) {
-                    return -1
-                } else if (a.date > b.date) {
-                    return 1
-                } else return 0
-            }))
-
-        }
+            setDataSource(data.sort((a, b) => a.date - b.date))
+        } else setDataSource([])
 
     }, [tableData, withReceivedBtn])
 
@@ -81,7 +70,10 @@ const ItemTable = ({tableData = [], withReceivedBtn = false}) => {
     return (
         <div>
             {dataSource &&
-            <Table dataSource={dataSource} columns={withReceivedBtn ? columns : columns.slice(0, columns.length - 1)}/>};
+            <Table style={{"width": "85vw", "margin": "35px auto"}}
+                   dataSource={dataSource}
+                   columns={withReceivedBtn ? columns : columns.slice(0, columns.length - 1)}
+            />};
         </div>
     );
 };

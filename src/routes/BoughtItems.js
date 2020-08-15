@@ -1,18 +1,27 @@
 import React from 'react';
 import {connect} from "react-redux";
 import ItemTable from "../components/ItemsTable";
+import StoreTable from "../components/StoreTable";
 import {Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
+import {updateReceivedAndBoughtList} from "../store/actions/boughtAction";
 
 
-const BoughtItems = ({items}) => {
+const BoughtItems = ({items, moveItemFromBoughtToReceived}) => {
+
+    const handleReceived = (item) => {
+        moveItemFromBoughtToReceived(item)
+    }
+
+
     return (
         <div>
             <h1>Bought items</h1>
             <Button type="primary" icon={<PlusOutlined/>}>
                 Add item
             </Button>
-            <ItemTable withReceivedBtn tableData={items}/>
+            <ItemTable handleReceived={handleReceived} withReceivedBtn tableData={items}/>
+            <StoreTable tableData={items}/>
         </div>
     );
 };
@@ -25,7 +34,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        moveItemFromBoughtToReceived: (item) => dispatch(updateReceivedAndBoughtList(item))
+    }
 }
 
 
