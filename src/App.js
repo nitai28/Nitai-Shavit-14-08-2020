@@ -4,6 +4,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    Redirect
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ReceivedList from "./routes/ReceivedList";
@@ -16,11 +17,10 @@ function App() {
                 <div>
                     <Navbar/>
                     <Switch>
-                        <Route path="/received">
-                            <ReceivedList/>
-                        </Route>
-                        <Route path="/">
-                            <BoughtItems/>
+                        <Route exact component={ReceivedList} path="/received"/>
+                        <Route exact component={BoughtItems} path="/list"/>
+                        <Route exact path="/">
+                            <Redirect exact from="/" to="list" />
                         </Route>
                     </Switch>
                 </div>

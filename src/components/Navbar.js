@@ -8,14 +8,15 @@ import {
 
 const {Header} = Layout;
 
-
 const Navbar = () => {
+
     return (
         <Layout className="layout">
             <Header>
-                <Menu defaultSelectedKeys={["store"]} theme={"dark"} mode="horizontal">
-                    <Menu.Item key="store" icon={<ShoppingCartOutlined/>}>
-                        <NavLink to="/">Store</NavLink>
+                <Menu defaultSelectedKeys={["list"]} theme={"dark"}
+                      mode="horizontal">
+                    <Menu.Item key="list" icon={<ShoppingCartOutlined/>}>
+                        <NavLink to="/list">Store</NavLink>
                     </Menu.Item>
                     <Menu.Item key="received" icon={<ShoppingOutlined/>}>
                         <NavLink to="/received">received</NavLink>
