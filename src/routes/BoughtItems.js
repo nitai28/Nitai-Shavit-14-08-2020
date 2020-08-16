@@ -1,24 +1,42 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {connect} from "react-redux";
 import ItemTable from "../components/ItemsTable";
 import StoreTable from "../components/StoreTable";
-import AddItemModal from "../components/AddItemModal";
+import AddItemModalForm from "../components/AddItemModalForm";
 import {Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
-import {updateReceivedAndBoughtList} from "../store/actions/boughtAction";
+import {addBoughtItem, updateReceivedAndBoughtList} from "../store/actions/boughtAction";
 
 
-const BoughtItems = ({items, moveItemFromBoughtToReceived}) => {
-    const [openAddItemModal, setOpenAddItemModal] = useState(false)
+const BoughtItems = ({items, moveItemFromBoughtToReceived, addBoughtItem, usdToNis}) => {
+    const [openAddItemModal, setOpenAddItemModal] = useState(false);
+
 
     const handleReceived = (item) => {
         moveItemFromBoughtToReceived(item)
-    }
+    };
+
+    const handleAddNewItem = useCallback((item) => {
+        console.log(322323)
+        const {itemName: name, storeName: onlineStore, deliveryEstDate} = item;
+        let newItem = {
+            name,
+            onlineStore,
+            deliveryEstDate,
+            priceInNIS: item.currencyType === 'usd' ? Math.floor(item.price * usdToNis) : item.price,
+            id: Date.now()
+        };
+        console.log(newItem)
+        addBoughtItem(newItem)
+    }, [usdToNis, addBoughtItem])
 
 
     return (
         <div>
-            <AddItemModal showModal={openAddItemModal}/>
+            <AddItemModalForm
+                onFormSubmit={handleAddNewItem}
+                closeModal={() => setOpenAddItemModal(false)}
+                showModal={openAddItemModal}/>
             <h1>Bought items</h1>
             <Button onClick={() => setOpenAddItemModal(true)} type="primary" icon={<PlusOutlined/>}>
                 Add item
@@ -30,15 +48,17 @@ const BoughtItems = ({items, moveItemFromBoughtToReceived}) => {
 };
 
 const mapStateToProps = state => {
-    let {items} = state.bought;
+    let {items, usdToNis} = state.bought;
     return {
-        items
+        items,
+        usdToNis
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        moveItemFromBoughtToReceived: (item) => dispatch(updateReceivedAndBoughtList(item))
+        moveItemFromBoughtToReceived: (item) => dispatch(updateReceivedAndBoughtList(item)),
+        addBoughtItem: (item) => dispatch(addBoughtItem(item))
     }
 }
 
