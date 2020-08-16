@@ -19,7 +19,7 @@ const initState = {
         deliveryEstDate: 1596666965183
     }],
     receivedItems: [],
-    nisToUsd: 3.5
+    usdToNis: 3.5
 };
 
 const boughtReducer = (state = initState, action) => {
@@ -31,10 +31,11 @@ const boughtReducer = (state = initState, action) => {
                 receivedItems: action.payload.updatedReceivedItems,
 
             };
-        case 'REMOVE_ITEM':
+        case 'ADD_NEW_BOUGHT_ITEM':
             return {
-                ...state
-            }
+                ...state,
+                items: [...state.items, action.payload]
+            };
 
         default:
             return state;

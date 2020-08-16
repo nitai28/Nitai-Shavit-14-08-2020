@@ -31,7 +31,7 @@ const StoreTable = ({tableData = []}) => {
             <Table style={{"width": "50vw", "margin": "35px auto"}}
                    dataSource={dataSource}
                    columns={columns}
-            />};
+            />}
         </div>
     );
 };

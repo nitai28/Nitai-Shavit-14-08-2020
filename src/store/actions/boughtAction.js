@@ -6,9 +6,9 @@ export const updateReceivedAndBoughtList = (receivedItem) => {
     }
 }
 
-export const resetAuth = () => {
+export const addBoughtItem = (item) => {
     return (dispatch) => {
-        dispatch({type: 'RESET_AUTH'});
+        dispatch({type: 'ADD_NEW_BOUGHT_ITEM', payload: item});
     }
 }
 
