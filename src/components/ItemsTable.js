@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {Button, Table} from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Table } from 'antd';
 import moment from 'moment';
+import '../styles/ItemTable.css'
 
-const ItemTable = ({tableData = [], withReceivedBtn = false, handleReceived = () => null}) => {
+const ItemTable = ({ tableData = [], withReceivedBtn = false, handleReceived = () => null }) => {
     const [dataSource, setDataSource] = useState([])
     const columns = [
         {
@@ -68,10 +69,10 @@ const ItemTable = ({tableData = [], withReceivedBtn = false, handleReceived = ()
     return (
         <div>
             {dataSource &&
-            <Table style={{"width": "85vw", "margin": "35px auto"}}
-                   dataSource={dataSource}
-                   columns={withReceivedBtn ? columns : columns.slice(0, columns.length - 1)}
-            />}
+                <Table
+                    dataSource={dataSource}
+                    columns={withReceivedBtn ? columns : columns.slice(0, columns.length - 1)}
+                />}
         </div>
     );
 };

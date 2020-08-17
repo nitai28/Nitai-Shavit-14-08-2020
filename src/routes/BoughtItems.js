@@ -1,14 +1,14 @@
-import React, {useCallback, useState} from 'react';
-import {connect} from "react-redux";
+import React, { useCallback, useState } from 'react';
+import { connect } from "react-redux";
 import ItemTable from "../components/ItemsTable";
 import StoreTable from "../components/StoreTable";
 import AddItemModalForm from "../components/AddItemModalForm";
-import {Button} from 'antd';
-import {PlusOutlined} from '@ant-design/icons';
-import {addBoughtItem, updateReceivedAndBoughtList} from "../store/actions/boughtAction";
+import { Button } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { addBoughtItem, updateReceivedAndBoughtList } from "../store/actions/boughtAction";
 
 
-const BoughtItems = ({items, moveItemFromBoughtToReceived, addBoughtItem, usdToNis}) => {
+const BoughtItems = ({ items, moveItemFromBoughtToReceived, addBoughtItem, usdToNis }) => {
     const [openAddItemModal, setOpenAddItemModal] = useState(false);
 
 
@@ -18,7 +18,7 @@ const BoughtItems = ({items, moveItemFromBoughtToReceived, addBoughtItem, usdToN
 
     const handleAddNewItem = useCallback((item) => {
         console.log(322323)
-        const {itemName: name, storeName: onlineStore, deliveryEstDate} = item;
+        const { itemName: name, storeName: onlineStore, deliveryEstDate } = item;
         let newItem = {
             name,
             onlineStore,
@@ -36,19 +36,19 @@ const BoughtItems = ({items, moveItemFromBoughtToReceived, addBoughtItem, usdToN
             <AddItemModalForm
                 onFormSubmit={handleAddNewItem}
                 closeModal={() => setOpenAddItemModal(false)}
-                showModal={openAddItemModal}/>
+                showModal={openAddItemModal} />
             <h1>Bought items</h1>
-            <Button onClick={() => setOpenAddItemModal(true)} type="primary" icon={<PlusOutlined/>}>
+            <Button onClick={() => setOpenAddItemModal(true)} type="primary" icon={<PlusOutlined />}>
                 Add item
             </Button>
-            <ItemTable handleReceived={handleReceived} withReceivedBtn tableData={items}/>
-            <StoreTable tableData={items}/>
+            <ItemTable handleReceived={handleReceived} withReceivedBtn tableData={items} />
+            <StoreTable tableData={items} />
         </div>
     );
 };
 
 const mapStateToProps = state => {
-    let {items, usdToNis} = state.bought;
+    let { items, usdToNis } = state.bought;
     return {
         items,
         usdToNis
