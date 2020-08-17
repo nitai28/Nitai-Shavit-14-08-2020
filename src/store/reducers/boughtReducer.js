@@ -19,7 +19,8 @@ const initState = {
         deliveryEstDate: 1596666965183
     }],
     receivedItems: [],
-    usdToNis: 3.5
+    usdToNis: 3.5,
+    apiError: ''
 };
 
 const boughtReducer = (state = initState, action) => {
@@ -35,6 +36,24 @@ const boughtReducer = (state = initState, action) => {
             return {
                 ...state,
                 items: [...state.items, action.payload]
+            };
+
+        case 'UPDATE_USD_TO_NIS':
+            return {
+                ...state,
+                usdToNis: action.payload
+            };
+
+        case 'UPDATE_API_ERROR':
+            return {
+                ...state,
+                apiError: 'Failed to update currency rate'
+            };
+
+        case 'CLEAR_API_ERROR':
+            return {
+                ...state,
+                apiError: ''
             };
 
         default:

@@ -4,7 +4,7 @@ import moment from 'moment';
 import '../styles/ItemTable.css'
 
 const ItemTable = ({ tableData = [], withReceivedBtn = false, handleReceived = () => null }) => {
-    const [dataSource, setDataSource] = useState([])
+    const [dataSource, setDataSource] = useState([]);
     const columns = [
         {
             title: 'Name',
@@ -63,7 +63,7 @@ const ItemTable = ({ tableData = [], withReceivedBtn = false, handleReceived = (
             setDataSource(data.sort((a, b) => a.date - b.date))
         } else setDataSource([])
 
-    }, [tableData, withReceivedBtn])
+    }, [tableData, withReceivedBtn]);
 
 
     return (

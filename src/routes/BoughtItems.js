@@ -17,8 +17,7 @@ const BoughtItems = ({ items, moveItemFromBoughtToReceived, addBoughtItem, usdTo
     };
 
     const handleAddNewItem = useCallback((item) => {
-        console.log(322323)
-        const { itemName: name, storeName: onlineStore, deliveryEstDate } = item;
+        const {itemName: name, storeName: onlineStore, deliveryEstDate} = item;
         let newItem = {
             name,
             onlineStore,
@@ -26,9 +25,8 @@ const BoughtItems = ({ items, moveItemFromBoughtToReceived, addBoughtItem, usdTo
             priceInNIS: item.currencyType === 'usd' ? Math.floor(item.price * usdToNis) : item.price,
             id: Date.now()
         };
-        console.log(newItem)
         addBoughtItem(newItem)
-    }, [usdToNis, addBoughtItem])
+    }, [usdToNis, addBoughtItem]);
 
 
     return (
