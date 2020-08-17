@@ -5,6 +5,8 @@ import '../styles/ItemTable.css'
 
 const ItemTable = ({ tableData = [], withReceivedBtn = false, handleReceived = () => null }) => {
     const [dataSource, setDataSource] = useState([]);
+    // const [currencyType,setCurrencyType]=useState('ILS');
+
     const columns = [
         {
             title: 'Name',

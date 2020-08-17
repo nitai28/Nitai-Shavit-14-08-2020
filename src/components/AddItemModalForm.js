@@ -64,7 +64,7 @@ const AddItemModalForm = ({showModal, closeModal, onFormSubmit}) => {
                                label="Currency">
                         <Select>
                             <Select.Option value="usd">$(USD)</Select.Option>
-                            <Select.Option value="nis">₪(NIS)</Select.Option>
+                            <Select.Option value="nis">₪(ILS)</Select.Option>
                         </Select>
                     </Form.Item>
                     <Form.Item name="deliveryEstDate"
