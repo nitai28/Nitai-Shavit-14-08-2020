@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Table } from 'antd';
+import React, {useState, useEffect} from 'react';
+import {Button, Table} from 'antd';
 import moment from 'moment';
 import '../styles/ItemTable.css'
+import {buildTableData} from "../services/dataService";
 
-const ItemTable = ({ tableData = [], withReceivedBtn = false, handleReceived = () => null }) => {
+const ItemTable = ({tableData = [], withReceivedBtn = false, handleReceived = () => null, currencyType, usdToIls}) => {
     const [dataSource, setDataSource] = useState([]);
-    // const [currencyType,setCurrencyType]=useState('ILS');
 
     const columns = [
         {
@@ -24,7 +24,7 @@ const ItemTable = ({ tableData = [], withReceivedBtn = false, handleReceived = (
             key: 'price',
         },
         {
-            title: 'Delivery Estimation Date',
+            title: 'Delivery Est Date',
             dataIndex: 'date',
             key: 'date',
             render: (date) => {
@@ -48,33 +48,19 @@ const ItemTable = ({ tableData = [], withReceivedBtn = false, handleReceived = (
 
     useEffect(() => {
         if (tableData.length > 0) {
-            let data = [];
-            tableData.forEach((item, index) => {
-                let itemObj = {
-                    key: index,
-                    name: item.name,
-                    store: item.onlineStore,
-                    price: item.priceInNIS,
-                    date: item.deliveryEstDate
-                }
-                if (withReceivedBtn) {
-                    itemObj.action = item
-                }
-                data.push(itemObj)
-            })
-            setDataSource(data.sort((a, b) => a.date - b.date))
+            setDataSource(buildTableData(tableData, withReceivedBtn, currencyType, usdToIls))
         } else setDataSource([])
 
-    }, [tableData, withReceivedBtn]);
+    }, [tableData, withReceivedBtn, currencyType, usdToIls]);
 
 
     return (
         <div>
             {dataSource &&
-                <Table
-                    dataSource={dataSource}
-                    columns={withReceivedBtn ? columns : columns.slice(0, columns.length - 1)}
-                />}
+            <Table
+                dataSource={dataSource}
+                columns={withReceivedBtn ? columns : columns.slice(0, columns.length - 1)}
+            />}
         </div>
     );
 };

@@ -1,15 +1,17 @@
-import React, { useCallback, useState } from 'react';
-import { connect } from "react-redux";
+import React, {useCallback, useEffect, useState} from 'react';
+import {connect} from "react-redux";
 import ItemTable from "../components/ItemsTable";
 import StoreTable from "../components/StoreTable";
 import AddItemModalForm from "../components/AddItemModalForm";
-import { Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import { addBoughtItem, updateReceivedAndBoughtList } from "../store/actions/boughtAction";
+import {Button, Switch} from 'antd';
+import {PlusOutlined} from '@ant-design/icons';
+import {addBoughtItem, updateReceivedAndBoughtList} from "../store/actions/boughtAction";
 
 
-const BoughtItems = ({ items, moveItemFromBoughtToReceived, addBoughtItem, usdToNis }) => {
+const BoughtItems = ({items, moveItemFromBoughtToReceived, addBoughtItem, usdToNis}) => {
     const [openAddItemModal, setOpenAddItemModal] = useState(false);
+    const [chosenCurrency, setChosenCurrency] = useState('ILS');
+    const [currentValueUsdToNis, setCurrentValueUsdToNis] = useState(usdToNis)
 
 
     const handleReceived = (item) => {
@@ -22,11 +24,16 @@ const BoughtItems = ({ items, moveItemFromBoughtToReceived, addBoughtItem, usdTo
             name,
             onlineStore,
             deliveryEstDate,
-            priceInNIS: item.currencyType === 'usd' ? Math.floor(item.price * usdToNis) : item.price,
+            priceInNIS: item.currencyType === 'usd' ? Math.round(item.price * usdToNis) : item.price,
             id: Date.now()
         };
         addBoughtItem(newItem)
     }, [usdToNis, addBoughtItem]);
+
+
+    useEffect(() => {
+        setCurrentValueUsdToNis(usdToNis)
+    }, [usdToNis]);
 
 
     return (
@@ -34,19 +41,34 @@ const BoughtItems = ({ items, moveItemFromBoughtToReceived, addBoughtItem, usdTo
             <AddItemModalForm
                 onFormSubmit={handleAddNewItem}
                 closeModal={() => setOpenAddItemModal(false)}
-                showModal={openAddItemModal} />
+                showModal={openAddItemModal}/>
+
             <h1>Bought items</h1>
-            <Button onClick={() => setOpenAddItemModal(true)} type="primary" icon={<PlusOutlined />}>
+            <Button onClick={() => setOpenAddItemModal(true)} type="primary" icon={<PlusOutlined/>}>
                 Add item
             </Button>
-            <ItemTable handleReceived={handleReceived} withReceivedBtn tableData={items} />
-            <StoreTable tableData={items} />
+            <div style={{"margin": "15px"}}>
+                <Switch
+                    onChange={(value) => setChosenCurrency(value ? 'ILS' : 'USD')}
+                    checkedChildren="₪ ILS"
+                    unCheckedChildren="$ USD"
+                    defaultChecked/>
+            </div>
+            <ItemTable
+                usdToIls={currentValueUsdToNis}
+                currencyType={chosenCurrency}
+                handleReceived={handleReceived}
+                withReceivedBtn tableData={items}/>
+            <StoreTable
+                usdToIls={currentValueUsdToNis}
+                currencyType={chosenCurrency}
+                tableData={items}/>
         </div>
     );
 };
 
 const mapStateToProps = state => {
-    let { items, usdToNis } = state.bought;
+    let {items, usdToNis} = state.bought;
     return {
         items,
         usdToNis

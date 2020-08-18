@@ -1,18 +1,20 @@
 .ant-table-wrapper {
-  width: 85vw;
-  margin: 35px auto;
+    width: 85vw;
+    margin: 35px auto;
 }
 
 @media screen and (max-width: 600px) {
-  .ant-table-wrapper {
-    width: 100vw;
-    margin: 35px 0;
-  }
-  .ant-table-content {
-    font-size: 10px;
-  }
-  .ant-btn-round {
-    padding: 4px 4px;
-    font-size: 10px;
-  }
+    .ant-table-wrapper {
+        width: 100vw;
+        margin: 35px 0;
+    }
+
+    .ant-table-content {
+        font-size: 10px;
+    }
+
+    .ant-btn-round {
+        padding: 4px 4px;
+        font-size: 10px;
+    }
 }

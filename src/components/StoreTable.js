@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {Table} from 'antd';
 import {buildStoreTableData} from '../services/dataService'
 
-const StoreTable = ({tableData = []}) => {
-    const [dataSource, setDataSource] = useState([])
+const StoreTable = ({tableData = [], currencyType, usdToIls}) => {
+    const [dataSource, setDataSource] = useState([]);
     const columns = [
         {
             title: 'Store Name',
@@ -20,9 +20,9 @@ const StoreTable = ({tableData = []}) => {
 
     useEffect(() => {
         if (tableData.length > 0) {
-            setDataSource(buildStoreTableData(tableData))
+            setDataSource(buildStoreTableData(tableData, currencyType, usdToIls))
         } else setDataSource([])
-    }, [tableData])
+    }, [tableData, currencyType, usdToIls])
 
 
     return (

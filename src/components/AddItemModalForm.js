@@ -19,10 +19,6 @@ const AddItemModalForm = ({showModal, closeModal, onFormSubmit}) => {
                 onFormSubmit(values);
                 form.resetFields();
                 closeModal();
-
-            })
-            .catch((errorInfo) => {
-                console.log(errorInfo)
             })
     };
 

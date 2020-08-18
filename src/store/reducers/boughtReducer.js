@@ -19,7 +19,7 @@ const initState = {
         deliveryEstDate: 1596666965183
     }],
     receivedItems: [],
-    usdToNis: 3.5,
+    usdToNis: 0,
     apiError: ''
 };
 
