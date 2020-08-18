@@ -47,8 +47,8 @@ const App = ({calculateCurrentUsd, apiError, clearError}) => {
                     <Switch>
                         <Route exact component={ReceivedList} path="/received"/>
                         <Route exact component={BoughtItems} path="/list"/>
-                        <Route exact path="/">
-                            <Redirect exact from="/" to="list"/>
+                        <Route path="/">
+                            <Redirect from="/" to="list"/>
                         </Route>
                     </Switch>
                 </div>
