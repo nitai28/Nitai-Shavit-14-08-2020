@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Nitai-Shavit-14-08-2020/static/css/main.93cbee15.chunk.css",
-    "main.js": "/Nitai-Shavit-14-08-2020/static/js/main.2603ebb0.chunk.js",
-    "main.js.map": "/Nitai-Shavit-14-08-2020/static/js/main.2603ebb0.chunk.js.map",
+    "main.js": "/Nitai-Shavit-14-08-2020/static/js/main.737d5fa4.chunk.js",
+    "main.js.map": "/Nitai-Shavit-14-08-2020/static/js/main.737d5fa4.chunk.js.map",
     "runtime-main.js": "/Nitai-Shavit-14-08-2020/static/js/runtime-main.ca8ebea7.js",
     "runtime-main.js.map": "/Nitai-Shavit-14-08-2020/static/js/runtime-main.ca8ebea7.js.map",
     "static/css/2.04ff9426.chunk.css": "/Nitai-Shavit-14-08-2020/static/css/2.04ff9426.chunk.css",
     "static/js/2.32ce4a75.chunk.js": "/Nitai-Shavit-14-08-2020/static/js/2.32ce4a75.chunk.js",
     "static/js/2.32ce4a75.chunk.js.map": "/Nitai-Shavit-14-08-2020/static/js/2.32ce4a75.chunk.js.map",
     "index.html": "/Nitai-Shavit-14-08-2020/index.html",
-    "precache-manifest.296ec37d9061dc54ee5501568f5feb46.js": "/Nitai-Shavit-14-08-2020/precache-manifest.296ec37d9061dc54ee5501568f5feb46.js",
+    "precache-manifest.7a7e750d49ee626fb4fb2fbe3c2a6acc.js": "/Nitai-Shavit-14-08-2020/precache-manifest.7a7e750d49ee626fb4fb2fbe3c2a6acc.js",
     "service-worker.js": "/Nitai-Shavit-14-08-2020/service-worker.js",
     "static/css/2.04ff9426.chunk.css.map": "/Nitai-Shavit-14-08-2020/static/css/2.04ff9426.chunk.css.map",
     "static/css/main.93cbee15.chunk.css.map": "/Nitai-Shavit-14-08-2020/static/css/main.93cbee15.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.04ff9426.chunk.css",
     "static/js/2.32ce4a75.chunk.js",
     "static/css/main.93cbee15.chunk.css",
-    "static/js/main.2603ebb0.chunk.js"
+    "static/js/main.737d5fa4.chunk.js"
   ]
 }

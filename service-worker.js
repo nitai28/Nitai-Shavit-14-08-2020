@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Nitai-Shavit-14-08-2020/precache-manifest.296ec37d9061dc54ee5501568f5feb46.js"
+  "/Nitai-Shavit-14-08-2020/precache-manifest.7a7e750d49ee626fb4fb2fbe3c2a6acc.js"
 );
 
 self.addEventListener('message', (event) => {
